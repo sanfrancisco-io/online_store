@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Banner from './components/Header/Banner';
+import Home from './components/Home/Home';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+type Props = {};
+
+const App = (props: Props) => {
+    const [search, setSearch] = useState<string>('');
+
+    return (
+        <div className='main'>
+            <Banner search={search} setSearch={setSearch} type='header' />
+
+            <div className='main_container'>
+                <Home search={search} />
+            </div>
+
+            <Banner bgColor='#ECEAEA' type='footer' />
+        </div>
+    );
+};
 
 export default App;

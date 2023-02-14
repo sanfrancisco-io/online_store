@@ -1,0 +1,47 @@
+.home {
+    &_title {
+        margin-top: 45px;
+        margin-bottom: 40px;
+    }
+    &_cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+.card {
+    border: 1px solid #e1e1e1;
+
+    &__actions {
+        padding: 20px 24px 24px 24px;
+
+        &_footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &_discount {
+            color: #a0a0a0;
+            font-size: 14px;
+            font-weight: 300;
+            text-decoration: line-through;
+        }
+
+        &_price {
+            font-weight: 700;
+        }
+        &_title {
+            margin-bottom: 24px;
+        }
+    }
+}
+
+.sold {
+    font-weight: 700;
+}
+.sold_card {
+    border: 1px solid #e1e1e1;
+    opacity: 0.5;
+}
