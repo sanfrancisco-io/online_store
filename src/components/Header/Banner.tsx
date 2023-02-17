@@ -52,46 +52,54 @@ const Header = ({
             style={{
                 backgroundColor: bgColor,
             }}
-            className={`${type === 'header' ? 'header' : 'footer'}`}
+            className='header_wrapper'
         >
-            <div className='header__left'>
-                <a href='/'>
-                    <img className='header__left_logo' src={logo} alt='logo' />
-                </a>
+            <div className={`${type === 'header' ? 'header' : 'footer'}`}>
+                <div className='header__left'>
+                    <a href='/'>
+                        <img
+                            className='header__left_logo'
+                            src={logo}
+                            alt='logo'
+                        />
+                    </a>
 
-                <div className='header__left_routes'>
-                    {headerTitleConfig.map((item) => (
-                        <a key={item.id} href={item.route}>
-                            {item.title}
-                        </a>
-                    ))}
+                    <div className='header__left_routes'>
+                        {headerTitleConfig.map((item) => (
+                            <a key={item.id} href={item.route}>
+                                {item.title}
+                            </a>
+                        ))}
+                    </div>
                 </div>
+                {type === 'header' ? (
+                    <div className='header__right'>
+                        <input
+                            value={search}
+                            onChange={(e) =>
+                                setSearch && setSearch(e.target.value)
+                            }
+                            placeholder='Поиск по названию картинки'
+                            className='header__right_input'
+                        />
+
+                        <Button title='Найти' type='normal' />
+                    </div>
+                ) : (
+                    <div className='header__right'>
+                        <div>
+                            <img src={phone} alt='phone' />
+                            <span>+7 (495) 555-55-55</span>
+                        </div>
+
+                        <div>
+                            <img src={adress} alt='adress' />
+                            <span>г. Москва, ул. Расплетина, 24</span>
+                        </div>
+                    </div>
+                )}
+                {type === 'header' && <div className='line' />}
             </div>
-            {type === 'header' ? (
-                <div className='header__right'>
-                    <input
-                        value={search}
-                        onChange={(e) => setSearch && setSearch(e.target.value)}
-                        placeholder='Поиск по названию картинки'
-                        className='header__right_input'
-                    />
-
-                    <Button title='Найти' type='normal' />
-                </div>
-            ) : (
-                <div className='header__right'>
-                    <div>
-                        <img src={phone} alt='phone' />
-                        <span>+7 (495) 555-55-55</span>
-                    </div>
-
-                    <div>
-                        <img src={adress} alt='adress' />
-                        <span>г. Москва, ул. Расплетина, 24</span>
-                    </div>
-                </div>
-            )}
-            {type === 'header' && <div className='line' />}
         </div>
     );
 };

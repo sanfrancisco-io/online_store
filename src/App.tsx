@@ -10,11 +10,9 @@ const App = (props: Props) => {
     return (
         <div className='main'>
             <Banner search={search} setSearch={setSearch} type='header' />
-
             <div className='main_container'>
                 <Home search={search} />
             </div>
-
             <Banner bgColor='#ECEAEA' type='footer' />
         </div>
     );

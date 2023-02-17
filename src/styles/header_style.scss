@@ -1,9 +1,15 @@
+.header_wrapper {
+    width: 100%;
+}
+
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 7rem;
-    position: relative;
+    padding: 24px 0;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
 
     &__left {
         display: flex;
@@ -59,5 +65,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 7rem;
+    padding: 24px 0;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
 }

@@ -37,12 +37,19 @@ const Button = ({ type = 'normal', title, cb }: Props) => {
         <button
             onClick={() => cb && cb(setLoader, setError, setSuccess)}
             className={`${buttonConfig[buttonConfig.indexOf(buttonType)]} ${
-                loader ? 'loader' : ''
+                loader ? 'buttonload' : ''
             } ${success ? 'success' : ''} ${error ? 'error' : ''}`}
             disabled={loader}
         >
-            {buttonType === 'inCart' && <img src={checkMark} alt='checkmark' />}
-            {buttonTitle}
+            {buttonType === 'inCart' && !loader && (
+                <img src={checkMark} alt='checkmark' />
+            )}
+
+            {loader ? (
+                <i className='fa fa-circle-o-notch fa-spin' />
+            ) : (
+                buttonTitle
+            )}
         </button>
     );
 };
