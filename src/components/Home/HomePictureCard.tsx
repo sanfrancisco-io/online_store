@@ -1,3 +1,10 @@
+import { useEffect } from 'react';
+import {
+    buttonTitles,
+    buttonTypes,
+    IBtnState,
+    IHomePicConfig,
+} from '../../types';
 import Button from '../Button/Button';
 
 type Props = {
@@ -6,6 +13,10 @@ type Props = {
     price: number;
     discount: number;
     hasPicture: boolean;
+    setPictures: React.Dispatch<React.SetStateAction<IHomePicConfig[]>>;
+    pictures: IHomePicConfig[];
+    buttonState: IBtnState;
+    id: number;
 };
 
 const HomePictureItem = ({
@@ -14,19 +25,46 @@ const HomePictureItem = ({
     price,
     discount,
     hasPicture,
+    id,
+    setPictures,
+    buttonState,
+    pictures,
 }: Props) => {
     const totalPrice = price - discount;
 
     const fetchSomeData = async (
         setLoading: (loading: boolean) => void,
         setError: (error: boolean) => void,
-        setSuccess: (success: any) => void
+        setSuccess: (success: any) => void,
+        id?: number
     ) => {
         try {
             setLoading(true);
             await fetch('https://jsonplaceholder.typicode.com/posts/1');
             setSuccess((prev: any) => !prev);
             setLoading(false);
+            setPictures((prev) =>
+                prev.map((item) => {
+                    if (id === item.id) {
+                        return {
+                            ...item,
+                            btnState: {
+                                ...item.btnState,
+                                btnType:
+                                    item.btnState.btnType === buttonTypes.normal
+                                        ? buttonTypes.inCart
+                                        : buttonTypes.normal,
+                                btnTitle:
+                                    item.btnState.btnTitle === buttonTitles.buy
+                                        ? buttonTitles.inCart
+                                        : buttonTitles.buy,
+                            },
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
         } catch (e) {
             setError(true);
         }
@@ -35,6 +73,10 @@ const HomePictureItem = ({
     const formatPrice = (price: number) => {
         return price.toLocaleString().split(',').join(' ');
     };
+
+    useEffect(() => {
+        localStorage.setItem('pictures', JSON.stringify(pictures));
+    }, [pictures]);
 
     return (
         <div className={hasPicture ? 'card' : 'sold_card'}>
@@ -60,8 +102,9 @@ const HomePictureItem = ({
 
                         <Button
                             cb={fetchSomeData}
-                            title='Купить'
-                            type='normal'
+                            id={id}
+                            title={buttonState.btnTitle}
+                            type={buttonState.btnType}
                         />
                     </div>
                 ) : (
